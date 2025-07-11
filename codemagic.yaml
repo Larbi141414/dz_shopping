@@ -1,0 +1,17 @@
+workflows:
+  kivy-build:
+    name: Build Kivy APK
+    max_build_duration: 30
+    environment:
+      vars:
+        BUILDOZER_SPEC: buildozer.spec
+      python: 3.10
+    scripts:
+      - |
+        sudo apt update
+        sudo apt install -y git zip unzip openjdk-11-jdk python3-pip build-essential
+        pip3 install --upgrade pip
+        pip3 install buildozer cython
+        buildozer android debug
+    artifacts:
+      - bin/*.apk
