@@ -5,18 +5,12 @@ workflows:
     environment:
       vars:
         BUILDOZER_SPEC: buildozer.spec
-    dependencies:
-      packages:
-        - zip
-        - unzip
-        - openjdk-11-jdk
-        - python3-pip
-        - build-essential
-      pip_packages:
-        - --upgrade pip
-        - buildozer
-        - cython
     scripts:
-      - buildozer android debug
+      - |
+        sudo apt update
+        sudo apt install -y zip unzip openjdk-11-jdk python3-pip build-essential
+        pip3 install --upgrade pip
+        pip3 install buildozer cython
+        buildozer android debug
     artifacts:
       - bin/*.apk
